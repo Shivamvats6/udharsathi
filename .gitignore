@@ -1,0 +1,70 @@
+# ================================
+# Dependencies
+# ================================
+node_modules/
+.pnpm-store/
+.yarn/
+.yarn-cache/
+
+# ================================
+# Environment / Secrets
+# ================================
+.env
+.env.*
+!.env.example
+*.local
+
+# ================================
+# Build / Production
+# ================================
+dist/
+dist-ssr/
+build/
+out/
+.next/
+.nuxt/
+.cache/
+.parcel-cache/
+
+# ================================
+# Logs
+# ================================
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# ================================
+# Coverage
+# ================================
+coverage/
+
+# ================================
+# OS / Editor
+# ================================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ================================
+# Backend Data
+# ================================
+backend/src/data/*.json
+!backend/src/data/seed*.json
+
+# ================================
+# Temporary Files
+# ================================
+tmp/
+temp/
+*.tmp
+
+# ================================
+# Test / Cache
+# ================================
+.nyc_output/
+.eslintcache
+.stylelintcache

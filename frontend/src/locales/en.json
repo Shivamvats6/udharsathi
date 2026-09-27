@@ -1,0 +1,98 @@
+{
+  "app": { "name": "FinWise", "tagline": "Your Money. Better Managed." },
+  "login": {
+    "title": "Simple  Powerful  Reliable",
+    "google": "Login with Google",
+    "or": "or",
+    "email": "Email / Mobile",
+    "password": "Password",
+    "submit": "Login",
+    "forgot": "Forgot Password?"
+  },
+  "nav": {
+    "home": "Home", "dashboard": "Dashboard", "customers": "Customers", "loans": "Loans",
+    "payments": "Payments", "reports": "Reports", "settings": "Settings", "more": "More", "notifications": "Notifications"
+  },
+  "dashboard": {
+    "hello": "Hello, {{name}}!", "subtitle": "Good to see you again",
+    "totalPrincipal": "Total Principal Given", "totalCollected": "Total Collected",
+    "outstanding": "Total Outstanding", "totalInterest": "Total Interest",
+    "lateFees": "Late Fees", "waivedFees": "Waived Fees",
+    "todaysCollection": "Today's Collection", "dueToday": "Due Today", "totalDue": "Total Due",
+    "collected": "Collected", "pending": "Pending",
+    "overdue": "Overdue", "overdueCustomers": "Overdue Customers", "overdueAmount": "Overdue Amount", "pendingFine": "Pending Fine",
+    "upcoming": "Upcoming", "next7days": "Next 7 days",
+    "quickActions": "Quick Actions", "addCustomer": "Add Customer", "addLoan": "Add Loan",
+    "addPayment": "Add Payment", "sendReminder": "Send Reminder"
+  },
+  "customers": {
+    "title": "Customers", "search": "Search name, phone or ID",
+    "all": "All", "active": "Active", "dueToday": "Due Today", "upcoming": "Upcoming",
+    "overdue": "Overdue", "paid": "Paid", "partiallyPaid": "Partially Paid",
+    "addCustomer": "Add Customer", "call": "Call", "whatsapp": "WhatsApp", "view": "View",
+    "name": "Name", "phone": "Phone", "address": "Address", "preferredLanguage": "Preferred Communication Language",
+    "notes": "Notes", "save": "Save Customer", "noResults": "No customers found"
+  },
+  "customerDetails": {
+    "overview": "Overview", "loans": "Loans", "payments": "Payments",
+    "call": "Call", "whatsapp": "WhatsApp", "edit": "Edit", "addLoan": "Add Loan",
+    "addPayment": "Add Payment", "sendReminder": "Send Reminder",
+    "totalLoans": "Total Loans", "totalPrincipal": "Total Principal", "totalPaid": "Total Paid",
+    "outstanding": "Outstanding", "interest": "Interest", "lateFees": "Late Fees", "waivedFees": "Waived Fees",
+    "activeLoans": "Active Loans", "paymentHistory": "Payment History", "reminderHistory": "Reminder History"
+  },
+  "loan": {
+    "addLoan": "Add Loan", "editLoan": "Edit Loan", "customer": "Customer", "principalAmount": "Principal Amount",
+    "interestType": "Interest Type", "interestRate": "Interest Rate (%)", "repaymentCycle": "Repayment Cycle",
+    "firstPaymentDate": "First Payment Date", "repaymentAmount": "Repayment Amount",
+    "gracePeriod": "Grace Period", "lateFineType": "Late Fine Type", "lateFineAmount": "Late Fine Amount",
+    "maximumFine": "Maximum Fine (Optional)", "notes": "Notes", "createLoan": "Create Loan",
+    "loanDetails": "Loan Details", "principal": "Principal Amount", "totalPayable": "Total Payable",
+    "amountPaid": "Amount Paid", "nextPayment": "Next Payment", "dueDate": "Due Date", "dueAmount": "Due Amount",
+    "overdueDays": "Overdue Days", "lateFine": "Late Fine", "totalDue": "Total Due",
+    "repaymentSchedule": "Repayment Schedule", "waiveFine": "Waive Fine",
+    "calcMode": "Calculate By", "byInterestRate": "Interest Rate", "byTotalPayable": "Total Payable",
+    "totalPayable": "Total Payable", "interestAmount": "Interest Amount",
+    "autoCalcNote": "Auto-calculated from Total Payable ÷ Tenure — change it manually if needed.",
+    "fixed": "Fixed", "percentage": "Percentage", "monthlyPercentage": "Monthly Percentage", "custom": "Custom",
+    "perDay": "Per Day", "fixedAmount": "Fixed Amount",
+    "daily": "Daily", "every2Days": "Every 2 Days", "every3Days": "Every 3 Days", "every7Days": "Every 7 Days",
+    "every10Days": "Every 10 Days", "every15Days": "Every 15 Days", "every30Days": "Every 30 Days", "monthly": "Monthly"
+  },
+  "payment": {
+    "addPayment": "Add Payment", "customer": "Customer", "loan": "Loan", "amount": "Amount",
+    "paymentDate": "Payment Date", "paymentMode": "Payment Mode", "notes": "Notes",
+    "includeLateFine": "Include Late Fine", "save": "Save Payment",
+    "cash": "Cash", "upi": "UPI", "bankTransfer": "Bank Transfer", "other": "Other"
+  },
+  "status": {
+    "upcoming": "Upcoming", "due_today": "Due Today", "paid": "Paid", "partially_paid": "Partially Paid",
+    "overdue": "Overdue", "cancelled": "Cancelled", "fine_waived": "Fine Waived", "active": "Active", "due_soon": "Due Soon"
+  },
+  "notifications": {
+    "title": "Notifications", "all": "All", "dueToday": "Due Today", "overdue": "Overdue", "upcoming": "Upcoming",
+    "paymentDue": "Payment Due", "paymentOverdue": "Payment Overdue", "fineApplied": "Late Fine Applied",
+    "paymentReceived": "Payment Received"
+  },
+  "reports": {
+    "title": "Reports", "daily": "Daily", "monthly": "Monthly", "outstanding": "Outstanding",
+    "totalCollected": "Total Collected", "principal": "Principal", "interest": "Interest", "lateFees": "Late Fees",
+    "exportReport": "Export Report", "exportCsv": "Export CSV", "exportExcel": "Export Excel", "exportPdf": "Export PDF",
+    "recentTransactions": "Recent Transactions"
+  },
+  "settings": {
+    "title": "Settings", "financerProfile": "Financer Profile", "name": "Name", "businessName": "Business Name",
+    "mobile": "Mobile", "whatsappNumber": "WhatsApp Number", "email": "Email", "address": "Address",
+    "languagePreferences": "Language & Preferences", "appLanguage": "App Language", "currency": "Currency", "dateFormat": "Date Format",
+    "notificationsSection": "Notifications", "pushNotifications": "Push Notifications", "dueDateReminders": "Due Date Reminders",
+    "overdueAlerts": "Overdue Alerts", "weeklySummary": "Weekly Summary",
+    "dataBackup": "Data & Backup", "backupToGoogleDrive": "Backup to Google Drive", "exportData": "Export Data",
+    "whatsappSettings": "WhatsApp Settings", "hindiDefaultMessage": "Hindi Default Message", "englishDefaultMessage": "English Default Message",
+    "save": "Save Changes", "logout": "Logout"
+  },
+  "common": {
+    "loading": "Loading...", "save": "Save", "cancel": "Cancel", "edit": "Edit", "delete": "Delete",
+    "close": "Close", "back": "Back", "search": "Search", "noData": "No data available", "error": "Something went wrong",
+    "confirm": "Confirm", "day": "day", "days": "days"
+  }
+}

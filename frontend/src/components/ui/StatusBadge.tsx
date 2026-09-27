@@ -1,0 +1,6 @@
+import { useTranslation } from "react-i18next";
+
+export function StatusBadge({ status }: { status: string }) {
+  const { t } = useTranslation();
+  return <span className={`status-badge status-${status}`}>{t(`status.${status}`, status)}</span>;
+}

@@ -1,0 +1,98 @@
+{
+  "app": { "name": "FinWise", "tagline": "आपका पैसा। बेहतर प्रबंधन।" },
+  "login": {
+    "title": "सरल  शक्तिशाली  विश्वसनीय",
+    "google": "Google से लॉगिन करें",
+    "or": "या",
+    "email": "ईमेल / मोबाइल",
+    "password": "पासवर्ड",
+    "submit": "लॉगिन",
+    "forgot": "पासवर्ड भूल गए?"
+  },
+  "nav": {
+    "home": "होम", "dashboard": "डैशबोर्ड", "customers": "ग्राहक", "loans": "लोन",
+    "payments": "भुगतान", "reports": "रिपोर्ट", "settings": "सेटिंग्स", "more": "और", "notifications": "सूचनाएं"
+  },
+  "dashboard": {
+    "hello": "नमस्ते, {{name}}!", "subtitle": "आपको फिर देखकर अच्छा लगा",
+    "totalPrincipal": "कुल दिया गया मूलधन", "totalCollected": "कुल वसूली",
+    "outstanding": "कुल बकाया", "totalInterest": "कुल ब्याज",
+    "lateFees": "विलंब शुल्क", "waivedFees": "माफ किया गया शुल्क",
+    "todaysCollection": "आज की वसूली", "dueToday": "आज देय", "totalDue": "कुल देय",
+    "collected": "प्राप्त", "pending": "बकाया",
+    "overdue": "अतिदेय", "overdueCustomers": "अतिदेय ग्राहक", "overdueAmount": "अतिदेय राशि", "pendingFine": "बकाया जुर्माना",
+    "upcoming": "आगामी", "next7days": "अगले 7 दिन",
+    "quickActions": "त्वरित कार्य", "addCustomer": "ग्राहक जोड़ें", "addLoan": "लोन जोड़ें",
+    "addPayment": "भुगतान जोड़ें", "sendReminder": "रिमाइंडर भेजें"
+  },
+  "customers": {
+    "title": "ग्राहक", "search": "नाम, फोन या ID खोजें",
+    "all": "सभी", "active": "सक्रिय", "dueToday": "आज देय", "upcoming": "आगामी",
+    "overdue": "अतिदेय", "paid": "भुगतान हुआ", "partiallyPaid": "आंशिक भुगतान",
+    "addCustomer": "ग्राहक जोड़ें", "call": "कॉल", "whatsapp": "व्हाट्सएप", "view": "देखें",
+    "name": "नाम", "phone": "फोन", "address": "पता", "preferredLanguage": "पसंदीदा संचार भाषा",
+    "notes": "नोट्स", "save": "ग्राहक सहेजें", "noResults": "कोई ग्राहक नहीं मिला"
+  },
+  "customerDetails": {
+    "overview": "अवलोकन", "loans": "लोन", "payments": "भुगतान",
+    "call": "कॉल", "whatsapp": "व्हाट्सएप", "edit": "संपादित करें", "addLoan": "लोन जोड़ें",
+    "addPayment": "भुगतान जोड़ें", "sendReminder": "रिमाइंडर भेजें",
+    "totalLoans": "कुल लोन", "totalPrincipal": "कुल मूलधन", "totalPaid": "कुल भुगतान",
+    "outstanding": "बकाया", "interest": "ब्याज", "lateFees": "विलंब शुल्क", "waivedFees": "माफ किया गया शुल्क",
+    "activeLoans": "सक्रिय लोन", "paymentHistory": "भुगतान इतिहास", "reminderHistory": "रिमाइंडर इतिहास"
+  },
+  "loan": {
+    "addLoan": "लोन जोड़ें", "editLoan": "लोन संपादित करें", "customer": "ग्राहक", "principalAmount": "मूलधन राशि",
+    "interestType": "ब्याज प्रकार", "interestRate": "ब्याज दर (%)", "repaymentCycle": "भुगतान चक्र",
+    "firstPaymentDate": "पहली भुगतान तिथि", "repaymentAmount": "भुगतान राशि",
+    "gracePeriod": "छूट अवधि", "lateFineType": "विलंब जुर्माना प्रकार", "lateFineAmount": "विलंब जुर्माना राशि",
+    "maximumFine": "अधिकतम जुर्माना (वैकल्पिक)", "notes": "नोट्स", "createLoan": "लोन बनाएं",
+    "loanDetails": "लोन विवरण", "principal": "मूलधन राशि", "totalPayable": "कुल देय",
+    "amountPaid": "भुगतान राशि", "nextPayment": "अगला भुगतान", "dueDate": "देय तिथि", "dueAmount": "देय राशि",
+    "overdueDays": "अतिदेय दिन", "lateFine": "विलंब जुर्माना", "totalDue": "कुल देय",
+    "repaymentSchedule": "भुगतान अनुसूची", "waiveFine": "जुर्माना माफ करें",
+    "calcMode": "गणना करें", "byInterestRate": "ब्याज दर से", "byTotalPayable": "कुल देय राशि से",
+    "totalPayable": "कुल देय राशि", "interestAmount": "ब्याज राशि",
+    "autoCalcNote": "कुल देय राशि ÷ किश्तों की संख्या से अपने आप गणना हुई है — ज़रूरत हो तो खुद बदल सकते हैं।",
+    "fixed": "निश्चित", "percentage": "प्रतिशत", "monthlyPercentage": "मासिक प्रतिशत", "custom": "कस्टम",
+    "perDay": "प्रति दिन", "fixedAmount": "निश्चित राशि",
+    "daily": "दैनिक", "every2Days": "हर 2 दिन", "every3Days": "हर 3 दिन", "every7Days": "हर 7 दिन",
+    "every10Days": "हर 10 दिन", "every15Days": "हर 15 दिन", "every30Days": "हर 30 दिन", "monthly": "मासिक"
+  },
+  "payment": {
+    "addPayment": "भुगतान जोड़ें", "customer": "ग्राहक", "loan": "लोन", "amount": "राशि",
+    "paymentDate": "भुगतान तिथि", "paymentMode": "भुगतान माध्यम", "notes": "नोट्स",
+    "includeLateFine": "विलंब जुर्माना शामिल करें", "save": "भुगतान सहेजें",
+    "cash": "नकद", "upi": "यूपीआई", "bankTransfer": "बैंक ट्रांसफर", "other": "अन्य"
+  },
+  "status": {
+    "upcoming": "आगामी", "due_today": "आज देय", "paid": "भुगतान हुआ", "partially_paid": "आंशिक भुगतान",
+    "overdue": "अतिदेय", "cancelled": "रद्द", "fine_waived": "जुर्माना माफ", "active": "सक्रिय", "due_soon": "जल्द देय"
+  },
+  "notifications": {
+    "title": "सूचनाएं", "all": "सभी", "dueToday": "आज देय", "overdue": "अतिदेय", "upcoming": "आगामी",
+    "paymentDue": "भुगतान देय", "paymentOverdue": "भुगतान अतिदेय", "fineApplied": "विलंब जुर्माना लगाया गया",
+    "paymentReceived": "भुगतान प्राप्त हुआ"
+  },
+  "reports": {
+    "title": "रिपोर्ट", "daily": "दैनिक", "monthly": "मासिक", "outstanding": "बकाया",
+    "totalCollected": "कुल वसूली", "principal": "मूलधन", "interest": "ब्याज", "lateFees": "विलंब शुल्क",
+    "exportReport": "रिपोर्ट निर्यात करें", "exportCsv": "CSV निर्यात", "exportExcel": "Excel निर्यात", "exportPdf": "PDF निर्यात",
+    "recentTransactions": "हाल के लेनदेन"
+  },
+  "settings": {
+    "title": "सेटिंग्स", "financerProfile": "फाइनेंसर प्रोफ़ाइल", "name": "नाम", "businessName": "व्यवसाय का नाम",
+    "mobile": "मोबाइल", "whatsappNumber": "व्हाट्सएप नंबर", "email": "ईमेल", "address": "पता",
+    "languagePreferences": "भाषा और वरीयताएं", "appLanguage": "ऐप भाषा", "currency": "मुद्रा", "dateFormat": "दिनांक प्रारूप",
+    "notificationsSection": "सूचनाएं", "pushNotifications": "पुश सूचनाएं", "dueDateReminders": "देय तिथि रिमाइंडर",
+    "overdueAlerts": "अतिदेय अलर्ट", "weeklySummary": "साप्ताहिक सारांश",
+    "dataBackup": "डेटा और बैकअप", "backupToGoogleDrive": "Google Drive पर बैकअप", "exportData": "डेटा निर्यात करें",
+    "whatsappSettings": "व्हाट्सएप सेटिंग्स", "hindiDefaultMessage": "हिंदी डिफ़ॉल्ट संदेश", "englishDefaultMessage": "अंग्रेज़ी डिफ़ॉल्ट संदेश",
+    "save": "बदलाव सहेजें", "logout": "लॉगआउट"
+  },
+  "common": {
+    "loading": "लोड हो रहा है...", "save": "सहेजें", "cancel": "रद्द करें", "edit": "संपादित करें", "delete": "हटाएं",
+    "close": "बंद करें", "back": "वापस", "search": "खोजें", "noData": "कोई डेटा उपलब्ध नहीं", "error": "कुछ गलत हो गया",
+    "confirm": "पुष्टि करें", "day": "दिन", "days": "दिन"
+  }
+}
