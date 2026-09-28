@@ -1,0 +1,46 @@
+name: Deploy Udharsathi
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to Contabo
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            set -e
+
+            cd /var/www/udharsathi
+
+            echo "==> Pulling latest code..."
+            git fetch origin main
+            git reset --hard origin/main
+
+            echo "==> Installing backend dependencies..."
+            cd backend
+            npm ci
+
+            echo "==> Building backend..."
+            npm run build
+
+            echo "==> Installing frontend dependencies..."
+            cd ../frontend
+            npm ci
+
+            echo "==> Building frontend..."
+            npm run build
+
+            echo "==> Restarting Udharsathi backend only..."
+            sudo /usr/bin/pm2 restart udharsathi-backend --update-env
+
+            echo "==> Deployment completed!"
