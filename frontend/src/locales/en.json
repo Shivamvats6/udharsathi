@@ -41,7 +41,7 @@
     "outstanding": "Outstanding", "interest": "Interest", "lateFees": "Late Fees", "waivedFees": "Waived Fees",
     "activeLoans": "Active Loans", "paymentHistory": "Payment History", "reminderHistory": "Reminder History"
   },
-  "loan": {
+    "loan": {
     "addLoan": "Add Loan", "editLoan": "Edit Loan", "customer": "Customer", "principalAmount": "Principal Amount",
     "interestType": "Interest Type", "interestRate": "Interest Rate (%)", "repaymentCycle": "Repayment Cycle",
     "firstPaymentDate": "First Payment Date", "repaymentAmount": "Repayment Amount",
@@ -52,7 +52,10 @@
     "overdueDays": "Overdue Days", "lateFine": "Late Fine", "totalDue": "Total Due",
     "repaymentSchedule": "Repayment Schedule", "waiveFine": "Waive Fine",
     "calcMode": "Calculate By", "byInterestRate": "Interest Rate", "byTotalPayable": "Total Payable",
-    "totalPayable": "Total Payable", "interestAmount": "Interest Amount",
+    "interestAmount": "Interest Amount",
+    "interestLabel": "Interest", "outstanding": "Outstanding",
+    "deleteLoan": "Delete Loan", "deleteLoanTitle": "Delete this loan?",
+    "deleteLoanMsg": "Loan of {{amount}} for {{name}} will be permanently deleted along with its payments and fine records. This cannot be undone.",
     "autoCalcNote": "Auto-calculated from Total Payable ÷ Tenure — change it manually if needed.",
     "fixed": "Fixed", "percentage": "Percentage", "monthlyPercentage": "Monthly Percentage", "custom": "Custom",
     "perDay": "Per Day", "fixedAmount": "Fixed Amount",

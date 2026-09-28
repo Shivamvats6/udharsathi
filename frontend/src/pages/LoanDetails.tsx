@@ -2,12 +2,20 @@ import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, Gift, Plus, Pencil } from "lucide-react";
+import { ArrowLeft, Gift, Plus, Pencil, Trash2, ChevronRight } from "lucide-react";
 import { api } from "@/lib/api";
-import { Loan, ScheduleInstallment } from "@/types";
+import { Customer, Loan, ScheduleInstallment } from "@/types";
 import { StatusBadge } from "@/components/ui/StatusBadge";
+import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
+import { useDeleteActions } from "@/hooks/useDeleteActions";
 import { formatCurrency, formatDate } from "@/utils/format";
 import { useSettings } from "@/context/SettingsContext";
+
+interface LoanDetailsResponse {
+  loan: Loan;
+  schedule: ScheduleInstallment[];
+  customer: Customer | null;
+}
 
 export function LoanDetails() {
   const { id } = useParams();
@@ -15,21 +23,44 @@ export function LoanDetails() {
   const { t } = useTranslation();
   const { settings } = useSettings();
   const queryClient = useQueryClient();
+  const { deleteLoan } = useDeleteActions();
   const [waiveTarget, setWaiveTarget] = useState<ScheduleInstallment | null>(null);
+  const [showDelete, setShowDelete] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
 
   const { data, isLoading } = useQuery({
     queryKey: ["loan", id],
-    queryFn: async () => (await api.get<{ loan: Loan; schedule: ScheduleInstallment[] }>(`/loans/${id}`)).data,
+    queryFn: async () => (await api.get<LoanDetailsResponse>(`/loans/${id}`)).data,
     enabled: !!id,
   });
 
   if (isLoading || !data) return <div className="text-center text-slate-400 py-20">{t("common.loading")}</div>;
 
-  const { loan, schedule } = data;
+  const { loan, schedule, customer } = data;
   const totalPayable = schedule.reduce((s, i) => s + i.dueAmount, 0);
   const totalPaid = schedule.reduce((s, i) => s + i.paidAmount, 0);
   const outstanding = schedule.reduce((s, i) => s + Math.max(i.totalDue - i.paidAmount, 0), 0);
   const nextInstallment = schedule.find((i) => i.status !== "paid");
+
+  // fixed / custom interest is a rupee amount, the other two types are a percentage
+  const isAmountInterest = loan.interestType === "fixed" || loan.interestType === "custom";
+  const interestText = isAmountInterest
+    ? `${formatCurrency(loan.interestRate)} (${t(`loan.${camel(loan.interestType)}`)})`
+    : `${loan.interestRate}% (${t(`loan.${camel(loan.interestType)}`)})`;
+  const shortLoanId = loan.id.replace(/^loan_/, "").slice(0, 8).toUpperCase();
+
+  async function handleDelete() {
+    setDeleting(true);
+    setDeleteError(null);
+    try {
+      await deleteLoan(loan.id);
+      navigate(`/customers/${loan.customerId}`, { replace: true });
+    } catch (e: any) {
+      setDeleteError(e?.response?.data?.error || t("common.error"));
+      setDeleting(false);
+    }
+  }
 
   return (
     <div className="space-y-4 max-w-2xl">
@@ -42,16 +73,39 @@ export function LoanDetails() {
         >
           <Pencil size={14} /> {t("customerDetails.edit")}
         </Link>
+        <button
+          onClick={() => { setDeleteError(null); setShowDelete(true); }}
+          className="flex items-center gap-1.5 text-sm font-semibold text-danger bg-red-50 rounded-xl px-3 py-1.5"
+        >
+          <Trash2 size={14} /> {t("common.delete")}
+        </button>
       </div>
 
+      {/* Customer this loan belongs to */}
+      {customer && (
+        <Link to={`/customers/${customer.id}`} className="card p-3.5 flex items-center gap-3 hover:border-brand/40">
+          <div className="w-11 h-11 rounded-full bg-blue-50 text-brand flex items-center justify-center font-bold shrink-0">
+            {customer.name.charAt(0)}
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="font-semibold text-navy truncate">{customer.name}</div>
+            <div className="text-xs text-slate-400">{customer.customerCode} · {customer.phone}</div>
+          </div>
+          <ChevronRight size={16} className="text-slate-300 shrink-0" />
+        </Link>
+      )}
+
       <div className="card p-4">
-        <div className="flex items-center justify-between mb-3">
-          <span className="font-semibold text-navy">{loan.notes || "Loan"}</span>
+        <div className="flex items-start justify-between mb-3">
+          <div>
+            <div className="font-semibold text-navy">{loan.notes || "Loan"}</div>
+            <div className="text-[11px] text-slate-400">Loan ID: LN-{shortLoanId}</div>
+          </div>
           <StatusBadge status={outstanding > 0 ? "active" : "paid"} />
         </div>
         <div className="grid grid-cols-2 gap-y-3 text-sm">
           <Stat label={t("loan.principal")} value={formatCurrency(loan.principalAmount)} />
-          <Stat label="Interest" value={`${loan.interestRate}% (${t(`loan.${camel(loan.interestType)}`)})`} />
+          <Stat label={t("loan.interestLabel")} value={interestText} />
           <Stat label={t("loan.totalPayable")} value={formatCurrency(totalPayable)} />
           <Stat label={t("loan.amountPaid")} value={formatCurrency(totalPaid)} color="text-success" />
           <Stat label={t("loan.outstanding")} value={formatCurrency(outstanding)} color="text-warning" />
@@ -115,6 +169,20 @@ export function LoanDetails() {
           onSaved={() => queryClient.invalidateQueries({ queryKey: ["loan", id] })}
         />
       )}
+
+      <ConfirmDialog
+        open={showDelete}
+        title={t("loan.deleteLoanTitle")}
+        message={t("loan.deleteLoanMsg", {
+          amount: formatCurrency(loan.principalAmount),
+          name: customer?.name || "-",
+        })}
+        confirmLabel={t("loan.deleteLoan")}
+        loading={deleting}
+        error={deleteError}
+        onConfirm={handleDelete}
+        onCancel={() => setShowDelete(false)}
+      />
     </div>
   );
 }

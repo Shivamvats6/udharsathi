@@ -131,6 +131,49 @@ export async function updateRowById(
   });
 }
 
+/**
+ * Delete every row in `tabName` whose `fieldName` column equals `value`.
+ * The column is located via the header row, so no column letter is needed.
+ * Rows are removed bottom-to-top so earlier indexes don't shift.
+ */
+export async function deleteRowsByField(tabName: string, fieldName: string, value: string): Promise<void> {
+  const rows = await readSheet(tabName);
+  if (rows.length < 2) return;
+
+  const colIdx = rows[0].indexOf(fieldName);
+  if (colIdx === -1) throw new Error(`Column "${fieldName}" not found in ${tabName}`);
+
+  const rowIndexes: number[] = []; // 0-based sheet row indexes (row 0 is the header)
+  for (let i = 1; i < rows.length; i++) {
+    if ((rows[i][colIdx] ?? "") === value) rowIndexes.push(i);
+  }
+  if (rowIndexes.length === 0) return;
+
+  const sheets = getSheetsClient();
+  const meta = await sheets.spreadsheets.get({ spreadsheetId: SPREADSHEET_ID() });
+  const sheet = (meta.data.sheets ?? []).find((s) => s.properties?.title === tabName);
+  const sheetId = sheet?.properties?.sheetId;
+  if (sheetId === undefined || sheetId === null) throw new Error(`Tab ${tabName} not found`);
+
+  const requests = rowIndexes
+    .sort((a, b) => b - a)
+    .map((rowIndex) => ({
+      deleteDimension: {
+        range: { sheetId, dimension: "ROWS", startIndex: rowIndex, endIndex: rowIndex + 1 },
+      },
+    }));
+
+  await sheets.spreadsheets.batchUpdate({
+    spreadsheetId: SPREADSHEET_ID(),
+    requestBody: { requests },
+  });
+}
+
+/** Delete the single row whose `id` column equals `id`. */
+export async function deleteRowById(tabName: string, id: string): Promise<void> {
+  await deleteRowsByField(tabName, "id", id);
+}
+
 /** Ensures all required tabs exist (per spec section 25); creates missing ones with headers. */
 export async function ensureSheetsExist(tabsWithHeaders: Record<string, string[]>): Promise<void> {
   const sheets = getSheetsClient();

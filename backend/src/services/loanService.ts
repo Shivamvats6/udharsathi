@@ -1,21 +1,24 @@
 import { repos } from "../repositories";
 import { generateRepaymentSchedule, Loan, ScheduleInstallment } from "../calculations/engine";
 
+type CustomerRecord = Awaited<ReturnType<typeof repos.customers.findById>>;
+
 export async function getLoanWithSchedule(
   loanId: string,
   today: string | Date = new Date()
-): Promise<{ loan: Loan; schedule: ScheduleInstallment[] } | null> {
+): Promise<{ loan: Loan; schedule: ScheduleInstallment[]; customer: CustomerRecord | null } | null> {
   const loan = await repos.loans.findById(loanId);
   if (!loan) return null;
   const payments = await repos.payments.findByLoan(loanId);
   const fines = await repos.fines.findByLoan(loanId);
+  const customer = (await repos.customers.findById(loan.customerId)) ?? null;
   const schedule = generateRepaymentSchedule(
     loan,
     today,
     payments.map((p) => ({ installmentNo: p.installmentNo, date: p.paymentDate, amount: p.amount })),
     fines.map((f) => ({ installmentNo: f.installmentNo, waivedAmount: f.waivedAmount }))
   );
-  return { loan, schedule };
+  return { loan, schedule, customer };
 }
 
 export async function getCustomerFinancialSummary(customerId: string, today: string | Date = new Date()) {

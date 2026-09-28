@@ -69,4 +69,9 @@ export class LocalJsonStore<T extends { id: string }> {
     const rows = this.read().filter((r) => r.id !== id);
     this.write(rows);
   }
+
+  async deleteWhere(pred: (row: T) => boolean): Promise<void> {
+    const rows = this.read().filter((r) => !pred(r));
+    this.write(rows);
+  }
 }

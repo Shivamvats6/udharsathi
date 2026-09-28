@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { X } from "lucide-react";
 import { api } from "@/lib/api";
 import { Customer } from "@/types";
+import { PhoneInput } from "@/components/ui/PhoneInput";
 
 interface CustomerFormModalProps {
   mode: "add" | "edit";
@@ -23,17 +24,18 @@ export function CustomerFormModal({ mode, customer, onClose, onSaved }: Customer
   const { t } = useTranslation();
   const queryClient = useQueryClient();
   const [name, setName] = useState(customer?.name || "");
-  const [phoneDigits, setPhoneDigits] = useState(toLocalDigits(customer?.phone || ""));
+  // phone is always stored as "+91XXXXXXXXXX" (or "" when empty)
+  const [phone, setPhone] = useState(() => {
+    const d = toLocalDigits(customer?.phone || "");
+    return d ? `+91${d}` : "";
+  });
   const [address, setAddress] = useState(customer?.address || "");
   const [preferredLanguage, setPreferredLanguage] = useState<"en" | "hi">(customer?.preferredLanguage || "en");
   const [notes, setNotes] = useState(customer?.notes || "");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  function handlePhoneChange(raw: string) {
-    // keep digits only, cap at 10 - the "+91" prefix is shown separately and added automatically on save
-    setPhoneDigits(raw.replace(/\D/g, "").slice(0, 10));
-  }
+  const phoneDigits = toLocalDigits(phone);
 
   async function handleSave() {
     setSaving(true);
@@ -76,17 +78,12 @@ export function CustomerFormModal({ mode, customer, onClose, onSaved }: Customer
 
           <div>
             <label className="label-field">{t("customers.phone")}</label>
-            <div className="flex items-center gap-2">
-              <span className="input-field w-16 shrink-0 text-center bg-slate-50 text-slate-500 select-none">+91</span>
-              <input
-                className="input-field flex-1"
-                value={phoneDigits}
-                onChange={(e) => handlePhoneChange(e.target.value)}
-                inputMode="numeric"
-                maxLength={10}
-                placeholder="98765 43210"
-              />
-            </div>
+            <PhoneInput
+              value={phone}
+              onChange={setPhone}
+              // contact se naam aaye to sirf tab bharo jab name field khali ho
+              onPickName={(picked) => setName((current) => (current.trim() ? current : picked))}
+            />
             {phoneDigits.length > 0 && phoneDigits.length < 10 && (
               <p className="text-[11px] text-warning mt-1">10 digit mobile number daaliye</p>
             )}

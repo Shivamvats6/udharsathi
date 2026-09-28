@@ -17,4 +17,7 @@ export class LocalNotificationRepository implements NotificationRepository {
   async markRead(id: string): Promise<void> {
     await store.update(id, { read: true });
   }
+  async deleteByLoan(loanId: string): Promise<void> {
+    await store.deleteWhere((n) => n.loanId === loanId);
+  }
 }

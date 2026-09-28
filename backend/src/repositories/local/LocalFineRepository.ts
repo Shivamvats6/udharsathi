@@ -13,4 +13,7 @@ export class LocalFineRepository implements FineRepository {
     const rec: FineAdjustment = { ...data, id: generateId("fine"), createdAt: nowISO() };
     return store.insert(rec);
   }
+  async deleteByLoan(loanId: string): Promise<void> {
+    await store.deleteWhere((f) => f.loanId === loanId);
+  }
 }

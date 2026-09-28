@@ -1,6 +1,6 @@
 import { FineRepository } from "../interfaces";
 import { FineAdjustment } from "../../types";
-import { readSheetAsObjects, appendRow } from "../../integrations/GoogleSheetsClient";
+import { readSheetAsObjects, appendRow, deleteRowsByField } from "../../integrations/GoogleSheetsClient";
 import { SHEET_HEADERS } from "./sheetHeaders";
 import { generateId, nowISO } from "../../utils/id";
 
@@ -27,5 +27,8 @@ export class GoogleFineRepository implements FineRepository {
     const rec: FineAdjustment = { ...data, id: generateId("fine"), createdAt: nowISO() };
     await appendRow(TAB, HEADER.map((h) => (rec as any)[h] ?? ""));
     return rec;
+  }
+  async deleteByLoan(loanId: string): Promise<void> {
+    await deleteRowsByField(TAB, "loanId", loanId);
   }
 }

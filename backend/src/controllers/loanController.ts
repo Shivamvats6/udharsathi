@@ -36,6 +36,24 @@ export async function updateLoan(req: Request, res: Response) {
   res.json(loan);
 }
 
+export async function deleteLoan(req: Request, res: Response) {
+  const loan = await repos.loans.findById(req.params.id);
+  if (!loan) return res.status(404).json({ error: "Loan not found" });
+
+  await repos.notifications.deleteByLoan(loan.id);
+  await repos.fines.deleteByLoan(loan.id);
+  await repos.payments.deleteByLoan(loan.id);
+  await repos.loans.delete(loan.id);
+
+  await repos.auditLogs.create({
+    entity: "Loan",
+    entityId: loan.id,
+    action: "delete",
+    details: `Deleted loan of ₹${loan.principalAmount} for customer ${loan.customerId}`,
+  });
+  res.status(204).send();
+}
+
 export async function waiveFine(req: Request, res: Response) {
   const parsed = fineWaiverSchema.safeParse(req.body);
   if (!parsed.success) return res.status(400).json({ error: parsed.error.issues[0].message });

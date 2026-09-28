@@ -19,4 +19,7 @@ export class LocalPaymentRepository implements PaymentRepository {
     const payment: Payment = { ...data, id: generateId("pay"), createdAt: nowISO() };
     return store.insert(payment);
   }
+  async deleteByLoan(loanId: string): Promise<void> {
+    await store.deleteWhere((p) => p.loanId === loanId);
+  }
 }

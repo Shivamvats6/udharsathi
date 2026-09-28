@@ -23,4 +23,7 @@ export class LocalLoanRepository implements LoanRepository {
   async update(id: string, data: Partial<Loan>): Promise<Loan> {
     return store.update(id, data);
   }
+  async delete(id: string): Promise<void> {
+    await store.delete(id);
+  }
 }

@@ -1,6 +1,6 @@
 import { PaymentRepository } from "../interfaces";
 import { Payment } from "../../types";
-import { readSheetAsObjects, appendRow } from "../../integrations/GoogleSheetsClient";
+import { readSheetAsObjects, appendRow, deleteRowsByField } from "../../integrations/GoogleSheetsClient";
 import { SHEET_HEADERS } from "./sheetHeaders";
 import { generateId, nowISO } from "../../utils/id";
 
@@ -36,5 +36,8 @@ export class GooglePaymentRepository implements PaymentRepository {
     const payment: Payment = { ...data, id: generateId("pay"), createdAt: nowISO() };
     await appendRow(TAB, HEADER.map((h) => (payment as any)[h] ?? ""));
     return payment;
+  }
+  async deleteByLoan(loanId: string): Promise<void> {
+    await deleteRowsByField(TAB, "loanId", loanId);
   }
 }

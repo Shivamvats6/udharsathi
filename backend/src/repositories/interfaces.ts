@@ -15,6 +15,7 @@ export interface LoanRepository {
   findById(id: string): Promise<Loan | null>;
   create(data: Omit<Loan, "id">): Promise<Loan>;
   update(id: string, data: Partial<Loan>): Promise<Loan>;
+  delete(id: string): Promise<void>;
 }
 
 export interface PaymentRepository {
@@ -22,17 +23,20 @@ export interface PaymentRepository {
   findByLoan(loanId: string): Promise<Payment[]>;
   findByCustomer(customerId: string): Promise<Payment[]>;
   create(data: Omit<Payment, "id" | "createdAt">): Promise<Payment>;
+  deleteByLoan(loanId: string): Promise<void>;
 }
 
 export interface FineRepository {
   findByLoan(loanId: string): Promise<FineAdjustment[]>;
   create(data: Omit<FineAdjustment, "id" | "createdAt">): Promise<FineAdjustment>;
+  deleteByLoan(loanId: string): Promise<void>;
 }
 
 export interface NotificationRepository {
   findAll(): Promise<AppNotification[]>;
   create(data: Omit<AppNotification, "id" | "createdAt" | "read">): Promise<AppNotification>;
   markRead(id: string): Promise<void>;
+  deleteByLoan(loanId: string): Promise<void>;
 }
 
 export interface SettingsRepository {

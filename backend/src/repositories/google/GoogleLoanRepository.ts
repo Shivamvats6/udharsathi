@@ -1,6 +1,6 @@
 import { LoanRepository } from "../interfaces";
 import { Loan } from "../../calculations/engine";
-import { readSheetAsObjects, appendRow, updateRowById } from "../../integrations/GoogleSheetsClient";
+import { readSheetAsObjects, appendRow, updateRowById, deleteRowById } from "../../integrations/GoogleSheetsClient";
 import { SHEET_HEADERS } from "./sheetHeaders";
 import { generateId } from "../../utils/id";
 
@@ -54,5 +54,8 @@ export class GoogleLoanRepository implements LoanRepository {
     const updated = { ...existing, ...data };
     await updateRowById(TAB, "A", id, HEADER, updated as any);
     return updated;
+  }
+  async delete(id: string): Promise<void> {
+    await deleteRowById(TAB, id);
   }
 }

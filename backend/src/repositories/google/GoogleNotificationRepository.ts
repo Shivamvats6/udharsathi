@@ -1,6 +1,11 @@
 import { NotificationRepository } from "../interfaces";
 import { AppNotification } from "../../types";
-import { readSheetAsObjects, appendRow, updateRowById } from "../../integrations/GoogleSheetsClient";
+import {
+  readSheetAsObjects,
+  appendRow,
+  updateRowById,
+  deleteRowsByField,
+} from "../../integrations/GoogleSheetsClient";
 import { SHEET_HEADERS } from "./sheetHeaders";
 import { generateId, nowISO } from "../../utils/id";
 
@@ -35,5 +40,8 @@ export class GoogleNotificationRepository implements NotificationRepository {
     const existing = all.find((n) => n.id === id);
     if (!existing) return;
     await updateRowById(TAB, "A", id, HEADER, { ...existing, read: "true" } as any);
+  }
+  async deleteByLoan(loanId: string): Promise<void> {
+    await deleteRowsByField(TAB, "loanId", loanId);
   }
 }
